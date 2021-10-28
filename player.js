@@ -189,10 +189,13 @@ class Player {
   }
 
   handleErrorEvent_(event){
-    this.waterMark_.innerHTML = event.detailedErrorCode;
-    this.broadcast(event.detailedErrorCode);
-    this.broadcast(event.error.toString());
-    this.broadcast(event.reason);
+    let msg = '{';
+    for (const key of Object.keys(event.error)) {
+      msg += key + ': ' + event.error[key].toString() + ', ';
+    }
+    msg += '}';
+    this.broadcast(msg);
+    this.waterMark_.innerHTML = msg;
   }
 
   /**
