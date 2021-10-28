@@ -238,11 +238,11 @@ class Player {
       //     google.ima.dai.api.StreamEvent.Type.ERROR, (event) => {
       //     }, false);
           
-      this.broadcast('Stream request failed. Loading backup stream...');
+      // this.broadcast('Stream request failed. Loading backup stream...');
       request.media.contentUrl = this.backupStream_;
       resolve(request);
       // Request Stream
-      const imaRequestData = request.media.customData;
+      // const imaRequestData = request.media.customData;
       // this.startTime_ = imaRequestData.startTime;
       // const streamRequest = (imaRequestData.assetKey) ?
       //     new google.ima.dai.api.LiveStreamRequest(imaRequestData) :
