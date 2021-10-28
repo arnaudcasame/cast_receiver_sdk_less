@@ -14,6 +14,7 @@ class Player {
      * @const
      */
     this.backupStream_ = 'https://firebasestorage.googleapis.com/v0/b/debtors2-0.appspot.com/o/test%2Fmain.m3u8?alt=media&token=6da7a7aa-6cc7-458f-8d2a-a44c06797be8';
+    this.backupStream_ = 'https://storage.googleapis.com/testtopbox-public/video_content/bbb/master.m3u8';
 
     /**
      * the cast context object provided by the CAF framework.
@@ -224,7 +225,7 @@ class Player {
       // Set media info and resolve promise on successful stream request
       // this.streamManager_.addEventListener(
       //     google.ima.dai.api.StreamEvent.Type.LOADED, (event) => {
-      //       this.broadcast('Stream request successful. Loading stream...');
+      //      this.broadcast('Stream request successful. Loading stream...');
       //       request.media.contentUrl = event.getStreamData().url;
       //       request.media.subtitles = event.getStreamData().subtitles;
       //       if (event.getStreamData().manifestFormat.toLowerCase() == 'dash') {
@@ -239,6 +240,7 @@ class Player {
       //     }, false);
           
       // this.broadcast('Stream request failed. Loading backup stream...');
+      this.broadcast('Stream request successful. Loading stream...');
       request.media.contentUrl = this.backupStream_;
       resolve(request);
       // Request Stream
