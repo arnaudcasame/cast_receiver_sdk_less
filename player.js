@@ -154,9 +154,13 @@ class Player {
         cast.framework.events.EventType.ID3, (event) => {
           // pass ID3 events from the stream to IMA to update live stream
           // cuepoints
-          this.streamManager_.processMetadata(
-              'ID3', event.segmentData, event.timestamp);
+          // this.streamManager_.processMetadata(
+          //     'ID3', event.segmentData, event.timestamp);
         });
+    
+    this.playerManager_.addEventListener([
+      cast.framework.events.EventType.ERROR
+    ], (event) => this.handleErrorEvent_(event));
 
     this.playerManager_.addEventListener(
         [
@@ -184,6 +188,12 @@ class Player {
       //         'messageData'),
       //     event.timedMetadataInfo.startTime);
     }
+  }
+
+  handleErrorEvent_(event){
+    this.broadcast(event.detailedErrorCode);
+    this.broadcast(event.error);
+    this.broadcast(event.reason);
   }
 
   /**
