@@ -79,8 +79,8 @@ class Player {
     options.customNamespaces[NAMESPACE] =
         cast.framework.system.MessageType.STRING;
     this.castContext_.start(options);
-    this.streamManager_ =
-        new google.ima.dai.api.StreamManager(this.mediaElement_);
+    // this.streamManager_ =
+    //     new google.ima.dai.api.StreamManager(this.mediaElement_);
   }
 
   /** Attaches event listeners and other callbacks. */
@@ -91,7 +91,7 @@ class Player {
     });
 
     this.attachPlayerManagerCallbacks_();
-    this.attachStreamManagerListeners_();
+    // this.attachStreamManagerListeners_();
   }
 
   /**
@@ -223,41 +223,41 @@ class Player {
   initializeStreamManager_(request) {
     return new Promise((resolve, reject) => {
       // Set media info and resolve promise on successful stream request
-      this.streamManager_.addEventListener(
-          google.ima.dai.api.StreamEvent.Type.LOADED, (event) => {
-            this.broadcast('Stream request successful. Loading stream...');
-            request.media.contentUrl = event.getStreamData().url;
-            request.media.subtitles = event.getStreamData().subtitles;
-            if (event.getStreamData().manifestFormat.toLowerCase() == 'dash') {
-              request.media.contentType = 'application/dash+xml';
-            }
-            resolve(request);
-          }, false);
+      // this.streamManager_.addEventListener(
+      //     google.ima.dai.api.StreamEvent.Type.LOADED, (event) => {
+      //       this.broadcast('Stream request successful. Loading stream...');
+      //       request.media.contentUrl = event.getStreamData().url;
+      //       request.media.subtitles = event.getStreamData().subtitles;
+      //       if (event.getStreamData().manifestFormat.toLowerCase() == 'dash') {
+      //         request.media.contentType = 'application/dash+xml';
+      //       }
+      //       resolve(request);
+      //     }, false);
 
       // Prepare backup stream and resolve promise on stream request error
-      this.streamManager_.addEventListener(
-          google.ima.dai.api.StreamEvent.Type.ERROR, (event) => {
-            this.broadcast('Stream request failed. Loading backup stream...');
-            request.media.contentUrl = this.backupStream_;
-            resolve(request);
-          }, false);
-
+      // this.streamManager_.addEventListener(
+      //     google.ima.dai.api.StreamEvent.Type.ERROR, (event) => {
+      //     }, false);
+          
+      this.broadcast('Stream request failed. Loading backup stream...');
+      request.media.contentUrl = this.backupStream_;
+      resolve(request);
       // Request Stream
       const imaRequestData = request.media.customData;
-      this.startTime_ = imaRequestData.startTime;
-      const streamRequest = (imaRequestData.assetKey) ?
-          new google.ima.dai.api.LiveStreamRequest(imaRequestData) :
-          new google.ima.dai.api.VODStreamRequest(imaRequestData);
-      this.streamManager_.requestStream(streamRequest);
+      // this.startTime_ = imaRequestData.startTime;
+      // const streamRequest = (imaRequestData.assetKey) ?
+      //     new google.ima.dai.api.LiveStreamRequest(imaRequestData) :
+      //     new google.ima.dai.api.VODStreamRequest(imaRequestData);
+      // this.streamManager_.requestStream(streamRequest);
       document.getElementById('splash').style.display = 'none';
 
       // For VOD Streams, update start time on media element
-      if (this.startTime_ &&
-          request.media.streamType ===
-              cast.framework.messages.StreamType.BUFFERED) {
-        this.mediaElement_.currentTime =
-            this.streamManager_.streamTimeForContentTime(this.startTime_);
-      }
+      // if (this.startTime_ &&
+      //     request.media.streamType ===
+      //         cast.framework.messages.StreamType.BUFFERED) {
+      //   this.mediaElement_.currentTime =
+      //       this.streamManager_.streamTimeForContentTime(this.startTime_);
+      // }
     });
   }
 
@@ -270,8 +270,8 @@ class Player {
    */
   processSeekRequest_(seekRequest) {
     const seekTo = seekRequest.currentTime;
-    const previousCuepoint =
-        this.streamManager_.previousCuePointForStreamTime(seekTo);
+    // const previousCuepoint =
+    //     this.streamManager_.previousCuePointForStreamTime(seekTo);
     if (this.adIsPlaying_) {
       // effectively cancels seek request
       seekRequest.currentTime = this.mediaElement_.currentTime;
@@ -350,7 +350,8 @@ class Player {
    */
   getContentTime() {
     const currentTime = this.mediaElement_.currentTime;
-    return this.streamManager_.contentTimeForStreamTime(currentTime);
+    // return this.streamManager_.contentTimeForStreamTime(currentTime);
+    return currentTime;
   }
 
   /**
