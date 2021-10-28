@@ -190,12 +190,14 @@ class Player {
 
   handleErrorEvent_(event){
     let msg = '{';
+    msg += ' detailedErrorCode: ' + event.detailedErrorCode + ', ';
+    msg += ' reason: ' + event.reason + ', ';
     for (const key of Object.keys(event.error)) {
       msg += key + ': { ';
       for (const key2 of Object.keys(event.error[key])) {
-        msg +=  key2 + ': ' + event.error[key][key2];
+        msg +=  key2 + ': ' + event.error[key][key2] + ', ';
       }
-      msg += '}, '
+      msg += '}, ';
     }
     msg += '}';
     this.broadcast(msg);
