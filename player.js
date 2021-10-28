@@ -1,5 +1,5 @@
 
-const NAMESPACE = 'urn:x-cast:com.google.ads.ima.cast';
+const NAMESPACE = 'urn:x-cast:com.google.ads.arnaudc.cast';
 
 class Player {
   /**
@@ -70,6 +70,8 @@ class Player {
      * @private
      */
     this.seekToTimeAfterAdBreak_ = -1;
+
+    this.waterMark_ = null;
   }
 
   /** Initializes CAF and IMA SDK */
@@ -93,6 +95,10 @@ class Player {
 
     this.attachPlayerManagerCallbacks_();
     // this.attachStreamManagerListeners_();
+  }
+
+  getWaterMark(waterMark){
+    this.waterMark_ = waterMark;
   }
 
   /**
@@ -241,6 +247,8 @@ class Player {
       //     }, false);
           
       // this.broadcast('Stream request failed. Loading backup stream...');
+      const fromSender = request.media.customData;
+      this.waterMark_.innerHTML = fromSender.assetKey;
       this.broadcast('Stream request successful. Loading stream...');
       request.media.contentUrl = this.backupStream_;
       resolve(request);
