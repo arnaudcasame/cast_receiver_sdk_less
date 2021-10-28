@@ -190,9 +190,9 @@ class Player {
 
   handleErrorEvent_(event){
     this.waterMark_.innerHTML = event.detailedErrorCode;
-    // this.broadcast(event.detailedErrorCode);
+    this.broadcast(event.detailedErrorCode);
     this.broadcast(event.error.toString());
-    // this.broadcast(event.reason);
+    this.broadcast(event.reason);
   }
 
   /**
