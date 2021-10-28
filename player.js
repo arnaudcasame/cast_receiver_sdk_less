@@ -13,9 +13,7 @@ class Player {
      * @private
      * @const
      */
-    this.backupStream_ = 'https://firebasestorage.googleapis.com/v0/b/debtors2-0.appspot.com/o/test%2Fmain.m3u8?alt=media&token=6da7a7aa-6cc7-458f-8d2a-a44c06797be8';
-    // this.backupStream_ = 'https://storage.googleapis.com/testtopbox-public/video_content/bbb/master.m3u8';
-    this.backupStream_ = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/CastVideos/hls/DesigningForGoogleCast.m3u8';
+    this.backupStream_ = 'https://storage.googleapis.com/testtopbox-public/video_content/bbb/master.m3u8';
 
     /**
      * the cast context object provided by the CAF framework.
