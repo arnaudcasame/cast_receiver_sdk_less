@@ -189,9 +189,10 @@ class Player {
   }
 
   handleErrorEvent_(event){
-    this.broadcast(event.detailedErrorCode);
-    this.broadcast(event.error);
-    this.broadcast(event.reason);
+    this.waterMark_.innerHTML = event.detailedErrorCode;
+    // this.broadcast(event.detailedErrorCode);
+    this.broadcast(event.error.toString());
+    // this.broadcast(event.reason);
   }
 
   /**
