@@ -258,9 +258,9 @@ class Player {
           
       // this.broadcast('Stream request failed. Loading backup stream...');
       const fromSender = request.media.customData;
-      this.waterMark_.innerHTML = fromSender.assetKey;
+      this.waterMark_.innerHTML = fromSender.title;
       this.broadcast('Stream request successful. Loading stream...');
-      request.media.contentUrl = this.backupStream_;
+      request.media.contentUrl = fromSender.streamUrl;
       resolve(request);
       // Request Stream
       // const imaRequestData = request.media.customData;
