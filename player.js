@@ -269,6 +269,8 @@ class Player {
       this.waterMark_.innerHTML = fromSender.title;
       this.broadcast('Stream request successful. Loading stream...');
       request.media.contentUrl = fromSender.streamUrl;
+      request.media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.TS;
+      request.media.hlsVideoSegmentFormat = cast.framework.messages.HlsSegmentFormat.MPEG2_TS;
       resolve(request);
       // Request Stream
       // const imaRequestData = request.media.customData;
