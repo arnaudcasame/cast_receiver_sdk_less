@@ -16,18 +16,18 @@ class UI {
                 .setStyle('font-size', 'xx-large')
                 .setStyle('text-align', 'center')
                 .getResult();
-        this.consolesHolder_ = this.uiBuilder_.reset()
-                .createElement('div')
-                .setStyle('border', '1px solid white')
-                .setStyle('position', 'relative')
-                .appendTo(this.console_)
-                .getResult();
         this.tabHolder_ = this.uiBuilder_
                 .reset()
                 .createElement('div')
                 .setStyle('display', 'flex')
                 .setStyle('background-color', 'green')
                 .setStyle('flex-direction', 'row')
+                .appendTo(this.console_)
+                .getResult();
+        this.consolesHolder_ = this.uiBuilder_.reset()
+                .createElement('div')
+                .setStyle('border', '1px solid white')
+                .setStyle('position', 'relative')
                 .appendTo(this.console_)
                 .getResult();
         this.tabsMetadata = {
@@ -58,6 +58,7 @@ class UI {
                         .createElement('div')
                         .setAttribute('id', id)
                         .setStyle('width', '100%')
+                        .setStyle('height', '100%')
                         .setStyle('position', 'absolute')
                         .appendTo(this.consolesHolder_)
             }
