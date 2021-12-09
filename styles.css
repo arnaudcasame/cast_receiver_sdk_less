@@ -6,8 +6,8 @@
   bottom: 0;
   opacity: 0.5;
   z-index: 99;
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
   font-size: xx-large;
   text-align: center;
 }
