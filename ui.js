@@ -7,7 +7,7 @@ class UI {
                 .setStyle('bottom', '0px')
                 .setStyle('right', '0px')
                 .setStyle('height', '50vh')
-                .setStyle('opacity', '0.5')
+                // .setStyle('opacity', '0.5')
                 .setStyle('display', 'flex')
                 .setStyle('flex-direction', 'column')
                 .setStyle('z-index', '99')
@@ -25,7 +25,6 @@ class UI {
         this.tabHolder_ = this.uiBuilder_
                 .reset()
                 .createElement('div')
-                .setStyle('height', '20px')
                 .setStyle('display', 'flex')
                 .setStyle('background-color', 'green')
                 .setStyle('flex-direction', 'row')
