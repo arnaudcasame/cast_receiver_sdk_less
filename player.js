@@ -1,3 +1,4 @@
+import { UI } from "winjs";
 
 const NAMESPACE = 'urn:x-cast:com.google.ads.arnaudc.cast';
 
@@ -55,6 +56,7 @@ class Player {
     this.startTime_ = 0;
 
     this.waterMark_ = null;
+    this._ui = new UI();
   }
 
   /** Initializes CAF */
