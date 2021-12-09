@@ -1,7 +1,7 @@
 /**
  * A class that builds the UI elements.
  */
- export class UIBuilder {
+ class UIBuilder {
     /**
      * Initializes the ui builder class
      */
