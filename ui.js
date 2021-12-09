@@ -1,33 +1,17 @@
 class UI {
     constructor() {
         this.uiBuilder_ = new UIBuilder();
-        this.console_ = this.uiBuilder_.getElementById('watermark_wrapper')
-                .setStyle('position', 'absolute')
-                .setStyle('left', '0px')
-                .setStyle('bottom', '0px')
-                .setStyle('right', '0px')
-                .setStyle('height', '50vh')
-                // .setStyle('opacity', '0.5')
-                .setStyle('display', 'flex')
-                .setStyle('flex-direction', 'column')
-                .setStyle('z-index', '99')
-                .setStyle('background-color', 'black')
-                .setStyle('color', 'white')
-                .setStyle('font-size', 'xx-large')
-                .setStyle('text-align', 'center')
+        this.console_ = this.uiBuilder_.getElementById('console-wrapper')
                 .getResult();
-        this.tabHolder_ = this.uiBuilder_
+        this.tabsHolder_ = this.uiBuilder_
                 .reset()
                 .createElement('div')
-                .setStyle('display', 'flex')
-                // .setStyle('background-color', 'green')
-                .setStyle('flex-direction', 'row')
+                .addIdName('tabs-holder')
                 .appendTo(this.console_)
                 .getResult();
         this.consolesHolder_ = this.uiBuilder_.reset()
                 .createElement('div')
-                .setStyle('border', '1px solid white')
-                .setStyle('position', 'relative')
+                .addIdName('consoles-holder')
                 .appendTo(this.console_)
                 .getResult();
         this.tabsMetadata = {
@@ -52,14 +36,12 @@ class UI {
                 this.uiBuilder_.reset()
                         .createElement('div')
                         .addTextValue(name)
-                        .setStyle('padding', '5px 10px')
-                        .appendTo(this.tabHolder_)
+                        .addClassName('tab')
+                        .appendTo(this.tabsHolder_)
                 this.uiBuilder_.reset()
                         .createElement('div')
+                        .addClassName('console')
                         .setAttribute('id', id)
-                        .setStyle('width', '100%')
-                        .setStyle('height', '100%')
-                        .setStyle('position', 'absolute')
                         .appendTo(this.consolesHolder_)
             }
         }
