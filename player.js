@@ -54,7 +54,7 @@ class Player {
     this.startTime_ = 0;
 
     this.ui_ = new UI();
-    this.waterMark_ = this.ui_.getWaterMark();
+    // this.waterMark_ = this.ui_.getWaterMark();
   }
 
   /** Initializes CAF */
@@ -174,7 +174,7 @@ class Player {
     }
     msg += '}';
     this.broadcast(msg);
-    this.waterMark_.innerHTML = msg;
+    // this.waterMark_.innerHTML += msg;
   }
 
   /**
@@ -188,7 +188,7 @@ class Player {
     return new Promise((resolve, reject) => {
       // this.broadcast('Stream request failed. Loading backup stream...');
       const fromSender = request.media.customData;
-      this.waterMark_.innerHTML = fromSender.title;
+      // this.waterMark_.innerHTML = fromSender.title;
       this.broadcast('Stream request successful. Loading stream...');
       request.media.contentUrl = fromSender.streamUrl;
       request.media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.TS;
