@@ -56,7 +56,7 @@ class Player {
     this.startTime_ = 0;
 
     this.waterMark_ = null;
-    this._ui = new UI();
+    this.ui_ = null;
   }
 
   /** Initializes CAF */
@@ -81,6 +81,11 @@ class Player {
 
   getWaterMark(waterMark){
     this.waterMark_ = waterMark;
+  }
+
+  setUiObject(ui){
+    this.ui_ = ui;
+    this.waterMark_ = this.ui_.getWaterMark();
   }
 
   /**

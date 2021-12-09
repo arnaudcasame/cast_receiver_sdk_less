@@ -2,8 +2,8 @@ import { UIBuilder } from "./ui-builder";
 
 class UI {
     constructor() {
-        this.uiBuilder = new UIBuilder();
-        this.uiBuilder.getElementById('watermark_wrapper')
+        this.uiBuilder_ = new UIBuilder();
+        this.waterMark_ = this.uiBuilder.getElementById('watermark_wrapper')
         .setAttribute('position', 'absolute')
         .setAttribute('left', '0px')
         .setAttribute('top', '50px')
@@ -14,5 +14,10 @@ class UI {
         .setAttribute('color', 'black')
         .setAttribute('font-size', 'xx-large')
         .setAttribute('text-align', 'center')
+        .getResult();
+    }
+
+    getWaterMark(){
+        return this.waterMark_;
     }
 }
