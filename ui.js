@@ -1,5 +1,3 @@
-import { UIBuilder } from "./ui-builder";
-
 class UI {
     constructor() {
         this.uiBuilder_ = new UIBuilder();
