@@ -73,7 +73,7 @@ class Player {
     this.castContext_.addCustomMessageListener(NAMESPACE, (event) => {
       this.processSenderMessage_(event.data);
     });
-
+    console.log(cast.framework.messages);
     this.attachPlayerManagerCallbacks_();
   }
 
@@ -160,6 +160,7 @@ class Player {
   }
 
   handleErrorEvent_(event){
+    console.log(event);
     let msg = '{';
     msg += ' detailedErrorCode: ' + event.detailedErrorCode + ', ';
     msg += ' reason: ' + event.reason + ', ';
@@ -194,7 +195,6 @@ class Player {
       resolve(request);
 
       document.getElementById('splash').style.display = 'none';
-      this.waterMark_.style.display = 'none';
     });
   }
 
