@@ -1,5 +1,3 @@
-import { UI } from "winjs";
-
 const NAMESPACE = 'urn:x-cast:com.google.ads.arnaudc.cast';
 
 class Player {
