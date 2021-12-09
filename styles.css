@@ -1,4 +1,4 @@
-div#watermark_wrapper :nth-child(1) {
+div#watermark_wrapper div:nth-child(1) {
   background-color: aquamarine;
 }
 
