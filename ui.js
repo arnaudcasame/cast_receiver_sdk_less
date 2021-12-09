@@ -19,7 +19,6 @@ class UI {
         this.consolesHolder_ = this.uiBuilder_.reset()
                 .createElement('div')
                 .setStyle('border', '1px solid white')
-                .setAttribute('id', id)
                 .setStyle('position', 'relative')
                 .appendTo(this.console_)
                 .getResult();
