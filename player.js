@@ -194,6 +194,7 @@ class Player {
       resolve(request);
 
       document.getElementById('splash').style.display = 'none';
+      this.waterMark_.style.display = 'none';
     });
   }
 
