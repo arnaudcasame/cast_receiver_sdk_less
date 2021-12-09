@@ -1,7 +1,7 @@
 class UI {
     constructor() {
         this.uiBuilder_ = new UIBuilder();
-        this.waterMark_ = this.uiBuilder.getElementById('watermark_wrapper')
+        this.waterMark_ = this.uiBuilder_.getElementById('watermark_wrapper')
         .setAttribute('position', 'absolute')
         .setAttribute('left', '0px')
         .setAttribute('top', '50px')
