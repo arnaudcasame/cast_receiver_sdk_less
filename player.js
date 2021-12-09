@@ -53,8 +53,8 @@ class Player {
      */
     this.startTime_ = 0;
 
-    this.waterMark_ = null;
-    this.ui_ = null;
+    this.ui_ = new UI();
+    this.waterMark_ = this.ui_.getWaterMark();
   }
 
   /** Initializes CAF */
@@ -75,15 +75,6 @@ class Player {
     });
 
     this.attachPlayerManagerCallbacks_();
-  }
-
-  getWaterMark(waterMark){
-    this.waterMark_ = waterMark;
-  }
-
-  setUiObject(ui){
-    this.ui_ = ui;
-    this.waterMark_ = this.ui_.getWaterMark();
   }
 
   /**
