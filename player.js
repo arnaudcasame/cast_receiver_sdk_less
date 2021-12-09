@@ -155,6 +155,7 @@ class Player {
    * @private
    */
   handleTimedMetadataEvent_(event) {
+    console.log(event);
     if (!event.timedMetadataInfo) {
       return;
     }
