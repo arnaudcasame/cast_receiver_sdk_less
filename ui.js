@@ -20,7 +20,7 @@ class UI {
                 .reset()
                 .createElement('div')
                 .setStyle('display', 'flex')
-                .setStyle('background-color', 'green')
+                // .setStyle('background-color', 'green')
                 .setStyle('flex-direction', 'row')
                 .appendTo(this.console_)
                 .getResult();

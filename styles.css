@@ -1,3 +1,7 @@
+div#watermark_wrapper :nth-child(1) {
+  background-color: aquamarine;
+}
+
 #errors {
   display: none;
 }
