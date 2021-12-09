@@ -95,7 +95,7 @@
 
     setStyle(name, value){
         this.element_.style[name] = value;
-        return this.element_;
+        return this;
     }
 
     /**
