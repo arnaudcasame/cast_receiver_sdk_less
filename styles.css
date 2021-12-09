@@ -4,7 +4,6 @@
   bottom: 0px;
   right: 0px;
   height: 50vh;
-  opacity: 0.5;
   display: flex;
   flex-direction: column;
   z-index: 99;
@@ -27,11 +26,40 @@
 }
 
 .tab {
-  padding: 5px 10px;
+  padding: 10px;
 }
 
 .console {
   width: 100%;
   height: 100%;
   position: absolute;
+}
+
+.list-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-content: space-evenly;
+}
+
+.list-item span {
+  padding: 0 10px;
+  text-align: start;
+  font-size: x-large;
+}
+
+.list-item span:first-child {
+  width: 10%;
+}
+
+.list-item span:nth-child(2) {
+  width: 10%;
+}
+
+.list-item span:nth-child(3) {
+  width: 10%;
+}
+
+.list-item span:last-child {
+  width: 70%;
 }

@@ -54,6 +54,9 @@ class Player {
     this.startTime_ = 0;
 
     this.ui_ = new UI();
+    // setInterval(()=>{
+    //   this.ui_.printLine('code', 'event', 'message', 0);
+    // }, 2000);
     // this.waterMark_ = this.ui_.getWaterMark();
   }
 
@@ -174,7 +177,7 @@ class Player {
     }
     msg += '}';
     this.broadcast(msg);
-    // this.waterMark_.innerHTML += msg;
+    this.ui_.printLine(event.detailedErrorCode, 'event', event.reason, 0);
   }
 
   /**
