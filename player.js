@@ -74,6 +74,7 @@ class Player {
       this.processSenderMessage_(event.data);
     });
     console.log(cast.framework.messages);
+    console.log(cast.framework.events);
     this.attachPlayerManagerCallbacks_();
   }
 
