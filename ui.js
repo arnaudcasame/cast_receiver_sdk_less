@@ -6,7 +6,7 @@ class UI {
         .setStyle('left', '0px')
         .setStyle('top', '50px')
         .setStyle('right', '0px')
-        .setStyle('opacity', '0.5')
+        // .setStyle('opacity', '0.5')
         .setStyle('z-index', '99')
         .setStyle('background-color', 'white')
         .setStyle('color', 'black')
