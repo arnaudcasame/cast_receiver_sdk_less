@@ -54,25 +54,10 @@ class Player {
      */
     this.startTime_ = 0;
 
-    /**
-     * Stores a flag to identify whether an ad is currently playing.
-     * @type {boolean}
-     * @private
-     */
-    this.adIsPlaying_ = false;
-
-    /**
-     * Stores the timestamp to seek to when ad completes, for snapback.
-     * -1 indicates that snapback has not been requested.
-     * @type {number}
-     * @private
-     */
-    this.seekToTimeAfterAdBreak_ = -1;
-
     this.waterMark_ = null;
   }
 
-  /** Initializes CAF and IMA SDK */
+  /** Initializes CAF */
   initialize() {
     // Map of namespace names to their types.
     const options = new cast.framework.CastReceiverOptions();
@@ -80,8 +65,6 @@ class Player {
     options.customNamespaces[NAMESPACE] =
         cast.framework.system.MessageType.STRING;
     this.castContext_.start(options);
-    // this.streamManager_ =
-    //     new google.ima.dai.api.StreamManager(this.mediaElement_);
   }
 
   /** Attaches event listeners and other callbacks. */
@@ -92,7 +75,6 @@ class Player {
     });
 
     this.attachPlayerManagerCallbacks_();
-    // this.attachStreamManagerListeners_();
   }
 
   getWaterMark(waterMark){
@@ -152,8 +134,6 @@ class Player {
         cast.framework.events.EventType.ID3, (event) => {
           // pass ID3 events from the stream to IMA to update live stream
           // cuepoints
-          // this.streamManager_.processMetadata(
-          //     'ID3', event.segmentData, event.timestamp);
         });
     
     this.playerManager_.addEventListener([
@@ -180,11 +160,6 @@ class Player {
     }
     if (event.timedMetadataInfo.dashTimedMetadata &&
         event.timedMetadataInfo.dashTimedMetadata.eventElement) {
-      // this.streamManager_.processMetadata(
-      //     event.timedMetadataInfo.dashTimedMetadata.schemeIdUri,
-      //     event.timedMetadataInfo.dashTimedMetadata.eventElement.getAttribute(
-      //         'messageData'),
-      //     event.timedMetadataInfo.startTime);
     }
   }
 
@@ -205,40 +180,6 @@ class Player {
   }
 
   /**
-   * Attaches IMA event managers
-   * @private
-   */
-  attachStreamManagerListeners_() {
-    // This fires at the beginning of each ad break
-    this.streamManager_.addEventListener(
-        google.ima.dai.api.StreamEvent.Type.AD_BREAK_STARTED, (event) => {
-          this.startAdBreak_();
-        });
-    // This fires at the end of each ad break
-    this.streamManager_.addEventListener(
-        google.ima.dai.api.StreamEvent.Type.AD_BREAK_ENDED, (event) => {
-          this.endAdBreak_();
-        });
-    // This fires periodically while ads are playing
-    this.streamManager_.addEventListener(
-        google.ima.dai.api.StreamEvent.Type.AD_PROGRESS, (event) => {
-          this.updateAdProgress_(event);
-        });
-
-    // Log the quartile events to the console for debugging
-    const quartileEvents = [
-      google.ima.dai.api.StreamEvent.Type.STARTED,
-      google.ima.dai.api.StreamEvent.Type.FIRST_QUARTILE,
-      google.ima.dai.api.StreamEvent.Type.MIDPOINT,
-      google.ima.dai.api.StreamEvent.Type.THIRD_QUARTILE,
-      google.ima.dai.api.StreamEvent.Type.COMPLETE
-    ];
-    this.streamManager_.addEventListener(quartileEvents, (event) => {
-      console.log(`IMA SDK Event: ${event.type}`);
-    }, false);
-  }
-
-  /**
    * initializes the IMA StreamManager and issues a stream request.
    * @param {!Object} request - The request data object from the CAF sender
    * @return {!Promise<!Object>} - The request object with added stream
@@ -247,23 +188,6 @@ class Player {
    */
   initializeStreamManager_(request) {
     return new Promise((resolve, reject) => {
-      // Set media info and resolve promise on successful stream request
-      // this.streamManager_.addEventListener(
-      //     google.ima.dai.api.StreamEvent.Type.LOADED, (event) => {
-      //      this.broadcast('Stream request successful. Loading stream...');
-      //       request.media.contentUrl = event.getStreamData().url;
-      //       request.media.subtitles = event.getStreamData().subtitles;
-      //       if (event.getStreamData().manifestFormat.toLowerCase() == 'dash') {
-      //         request.media.contentType = 'application/dash+xml';
-      //       }
-      //       resolve(request);
-      //     }, false);
-
-      // Prepare backup stream and resolve promise on stream request error
-      // this.streamManager_.addEventListener(
-      //     google.ima.dai.api.StreamEvent.Type.ERROR, (event) => {
-      //     }, false);
-          
       // this.broadcast('Stream request failed. Loading backup stream...');
       const fromSender = request.media.customData;
       this.waterMark_.innerHTML = fromSender.title;
@@ -272,22 +196,8 @@ class Player {
       request.media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.TS;
       request.media.hlsVideoSegmentFormat = cast.framework.messages.HlsSegmentFormat.MPEG2_TS;
       resolve(request);
-      // Request Stream
-      // const imaRequestData = request.media.customData;
-      // this.startTime_ = imaRequestData.startTime;
-      // const streamRequest = (imaRequestData.assetKey) ?
-      //     new google.ima.dai.api.LiveStreamRequest(imaRequestData) :
-      //     new google.ima.dai.api.VODStreamRequest(imaRequestData);
-      // this.streamManager_.requestStream(streamRequest);
-      document.getElementById('splash').style.display = 'none';
 
-      // For VOD Streams, update start time on media element
-      // if (this.startTime_ &&
-      //     request.media.streamType ===
-      //         cast.framework.messages.StreamType.BUFFERED) {
-      //   this.mediaElement_.currentTime =
-      //       this.streamManager_.streamTimeForContentTime(this.startTime_);
-      // }
+      document.getElementById('splash').style.display = 'none';
     });
   }
 
@@ -300,59 +210,7 @@ class Player {
    */
   processSeekRequest_(seekRequest) {
     const seekTo = seekRequest.currentTime;
-    // const previousCuepoint =
-    //     this.streamManager_.previousCuePointForStreamTime(seekTo);
-    if (this.adIsPlaying_) {
-      // effectively cancels seek request
-      seekRequest.currentTime = this.mediaElement_.currentTime;
-    } else if (!previousCuepoint.played) {
-      // Adding 0.1 to cuepoint start time because of bug where stream
-      // freezes when seeking to certain times in VOD streams.
-      seekRequest.currentTime = previousCuepoint.start + 0.1;
-      this.seekToTimeAfterAdBreak_ = seekTo;
-    }
     return seekRequest;
-  }
-
-  /**
-   * Sets flags and UI at the start of an ad break.
-   * @private
-   */
-  startAdBreak_() {
-    this.adIsPlaying_ = true;
-    document.getElementById('ad-ui').style.display = 'block';
-    this.broadcast('adBreakStarted');
-  }
-
-  /**
-   * Sets flags and UI and triggers snapback at the end of an ad break.
-   * @private
-   */
-  endAdBreak_() {
-    this.adIsPlaying_ = false;
-    document.getElementById('ad-ui').style.display = 'none';
-    this.broadcast('adBreakEnded');
-    // process any pending snapback request
-    if (this.seekToTimeAfterAdBreak_ != -1) {
-      this.seek(this.seekToTimeAfterAdBreak_);
-      this.seekToTimeAfterAdBreak_ = -1;
-    }
-  }
-
-  /**
-   * Updates ad UI to display progress in ad break.
-   * @param {!Object} event - The ad progress event from IMA
-   * @private
-   */
-  updateAdProgress_(event) {
-    const adData = event.getStreamData().adProgressData;
-    document.getElementById('ad-position').textContext =
-        parseInt(adData.adPosition, 10);
-    document.getElementById('total-ads').textContext =
-        parseInt(adData.totalAds, 10);
-    document.getElementById('time-value').textContext =
-        Math.ceil(parseFloat(adData.duration) - parseFloat(adData.currentTime));
-    document.getElementById('ad-ui').style.display = 'block';
   }
 
   /**
@@ -360,7 +218,7 @@ class Player {
    * @param {number} time - The target stream time in seconds, including ads.
    */
   seek(time) {
-    if (time > 0 && !this.adIsPlaying_) {
+    if (time > 0) {
       this.mediaElement_.currentTime = time;
       this.broadcast('Seeking to: ' + time);
     }
@@ -380,7 +238,6 @@ class Player {
    */
   getContentTime() {
     const currentTime = this.mediaElement_.currentTime;
-    // return this.streamManager_.contentTimeForStreamTime(currentTime);
     return currentTime;
   }
 
