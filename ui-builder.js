@@ -93,6 +93,11 @@
         return this;
     }
 
+    setStyle(name, value){
+        this.element_.style[name] = value;
+        return this.element_;
+    }
+
     /**
      * Appends currently created element to the given container
      * @param {HTMLElement} container the HTML element that holds the created HTML element

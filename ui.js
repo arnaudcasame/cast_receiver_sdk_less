@@ -2,16 +2,16 @@ class UI {
     constructor() {
         this.uiBuilder_ = new UIBuilder();
         this.waterMark_ = this.uiBuilder_.getElementById('watermark_wrapper')
-        .setAttribute('position', 'absolute')
-        .setAttribute('left', '0px')
-        .setAttribute('top', '50px')
-        .setAttribute('right', '0px')
-        .setAttribute('opacity', '0.5')
-        .setAttribute('z-index', '99')
-        .setAttribute('background-color', 'white')
-        .setAttribute('color', 'black')
-        .setAttribute('font-size', 'xx-large')
-        .setAttribute('text-align', 'center')
+        .setStyle('position', 'absolute')
+        .setStyle('left', '0px')
+        .setStyle('top', '50px')
+        .setStyle('right', '0px')
+        .setStyle('opacity', '0.5')
+        .setStyle('z-index', '99')
+        .setStyle('background-color', 'white')
+        .setStyle('color', 'black')
+        .setStyle('font-size', 'xx-large')
+        .setStyle('text-align', 'center')
         .getResult();
     }
 
