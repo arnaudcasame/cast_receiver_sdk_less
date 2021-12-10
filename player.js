@@ -259,6 +259,7 @@ class Player {
   }
 
   handleAllEvents(event){
+    console.log(event.type, event);
     switch (event.type) {
       case cast.framework.events.EventType.MEDIA_STATUS:
         this.handleMediaStatusEvent(event);
