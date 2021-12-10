@@ -136,6 +136,12 @@ class Player {
           // cuepoints
           console.log(cast.framework.events.EventType.ID3, event);
         });
+
+        this.playerManager_.addEventListener(
+          cast.framework.events.EventType.ALL, (event) => {
+            // pass ALL events from the stream
+            console.log('ALL_EVENT', event);
+          });
     
     this.playerManager_.addEventListener([
       cast.framework.events.EventType.ERROR
