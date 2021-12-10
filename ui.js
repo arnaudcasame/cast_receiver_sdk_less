@@ -84,9 +84,9 @@ class UI {
                                 .getResult();
         
         for (const key of Object.keys(data)) {
-            this.uiBuilder_.reset()
+                this.uiBuilder_.reset()
                         .createElement('span')
-                        .addTextValue(data[key])
+                        .addTextValue(data[key] ? data[key] : '')
                         .appendTo(listItem);
         }
     }

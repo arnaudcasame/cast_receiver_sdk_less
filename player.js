@@ -264,6 +264,41 @@ class Player {
       case cast.framework.events.EventType.MEDIA_STATUS:
         this.handleMediaStatusEvent(event);
         break;
+      case cast.framework.events.EventType.REQUEST_FOCUS_STATE:
+        const senderId = event.senderId ? 'SenderID: ' + event.senderId : '';
+        this.ui_.printLine(null, event.type, 'Cast Player request focus. ' + senderId, 0);
+        break;
+      case cast.framework.events.EventType.REQUEST_LOAD:
+        this.handleRequestLoad(event);
+        break;
+      case cast.framework.events.EventType.PLAYER_LOADING:
+        this.handlePlayerLoading(event);
+        break;
+      case cast.framework.events.EventType.LOAD_START:
+        this.handleCommonEvents(event);
+        break;
+      case cast.framework.events.EventType.BITRATE_CHANGED:
+        this.handleCommonEvents(event);
+        break;
+      case cast.framework.events.EventType.PROGRESS:
+        this.handleCommonEvents(event);
+        break;
+      case cast.framework.events.EventType.PLAY:
+        this.handleCommonEvents(event);
+        break;
+      case cast.framework.events.EventType.WAITING:
+        this.handleCommonEvents(event);
+        break;
+      case cast.framework.events.EventType.DURATION_CHANGE:
+        this.handleCommonEvents(event);
+        break;
+      case cast.framework.events.EventType.LOADED_METADATA:
+        this.handleCommonEvents(event);
+        break;
+      case cast.framework.events.EventType.SEGMENT_DOWNLOADED:
+        this.ui_.printLine(null, event.type, `download time: ${event.downloadTime}`, 0);
+        this.ui_.printLine(null, null, `downloaded size: ${event.size/1000} kb`, 0);
+        break;
       default:
         break;
     }
@@ -271,5 +306,21 @@ class Player {
 
   handleMediaStatusEvent(event){
     this.ui_.printLine('', event.type, 'Player State: ' + event.mediaStatus.playerState, 0);
+  }
+
+  handleRequestLoad(event){
+    this.ui_.printLine(null, event.type, 'SenderId: ' + event.senderId, 0);
+    this.ui_.printLine(null, null, 'ContentType: ' + event.requestData.media.contentType, 0);
+    this.ui_.printLine(null, null, 'ContentUrl: ' + event.requestData.media.contentUrl, 0);
+    this.ui_.printLine(null, null, 'Duration: ' + event.requestData.media.duration, 0);
+  }
+
+  handlePlayerLoading(event){
+    const message = event.media.customData.title ? `Title: ${event.media.customData.title}, format: ${event.media.customData.format}` : '';
+    this.ui_.printLine(null, event.type, message, 0);
+  }
+
+  handleCommonEvents(event){
+    this.ui_.printLine(null, event.type, `current time: ${event.currentMediaTime}`, 0);
   }
 }
