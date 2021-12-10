@@ -269,6 +269,6 @@ class Player {
   }
 
   handleMediaStatusEvent(event){
-    this.ui_.printLine('', event.type, event.mediaStatus.playerState, 0);
+    this.ui_.printLine('', event.type, 'Player State: ' + event.mediaStatus.playerState, 0);
   }
 }

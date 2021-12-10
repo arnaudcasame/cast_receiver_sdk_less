@@ -63,6 +63,7 @@ class UI {
     printLine(code, event, message, whichConsole){
         const list = this.consoles_[whichConsole].firstChild;
         this.createLine_(list, {time : this.formatTime_(), event, code, message});
+        list.scrollTop = list.scrollHeight;
     }
 
     /**
