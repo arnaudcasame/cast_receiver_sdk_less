@@ -88,7 +88,7 @@ class Player {
    * @private
    */
   processSenderMessage_(message) {
-    console.log('Received message from sender: ' + message);
+    // console.log('Received message from sender: ' + message);
     const messageArray = message.split(',');
     const method = messageArray[0];
     switch (method) {
@@ -254,7 +254,7 @@ class Player {
    * @param {string} message - The message to be sent to attached senders
    */
   broadcast(message) {
-    console.log(message);
+    // console.log(message);
     this.castContext_.sendCustomMessage(NAMESPACE, undefined, message);
   }
 
