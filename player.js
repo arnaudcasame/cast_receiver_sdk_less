@@ -137,11 +137,8 @@ class Player {
           console.log(cast.framework.events.EventType.ID3, event);
         });
 
-        this.playerManager_.addEventListener(
-          cast.framework.events.EventType.ALL, (event) => {
-            // pass ALL events from the stream
-            console.log('ALL_EVENT', event);
-          });
+    this.playerManager_.addEventListener(
+      cast.framework.events.EventType.ALL, this.handleAllEvents);
     
     this.playerManager_.addEventListener([
       cast.framework.events.EventType.ERROR
@@ -259,5 +256,19 @@ class Player {
   broadcast(message) {
     console.log(message);
     this.castContext_.sendCustomMessage(NAMESPACE, undefined, message);
+  }
+
+  handleAllEvents(event){
+    switch (event.type) {
+      case cast.framework.events.EventType.MEDIA_STATUS:
+        this.handleMediaStatusEvent(event);
+        break;
+      default:
+        break;
+    }
+  }
+
+  handleMediaStatusEvent(event){
+    this.ui_.printLine('', event.type, event.mediaStatus.playerState, 0);
   }
 }
