@@ -138,7 +138,7 @@ class Player {
         });
 
     this.playerManager_.addEventListener(
-      cast.framework.events.EventType.ALL, this.handleAllEvents);
+      cast.framework.events.EventType.ALL, this.handleAllEvents.bind(this));
     
     this.playerManager_.addEventListener([
       cast.framework.events.EventType.ERROR
