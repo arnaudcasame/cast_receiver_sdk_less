@@ -27,12 +27,16 @@ class UI {
         let index = 0;
         for (const id in this.tabsMetadata) {
             const noDisplay = 'none';
+            let isActive = ' active';
+            if(index > 0){
+                isActive = '';
+            }
             if (Object.hasOwnProperty.call(this.tabsMetadata, id)) {
                 const name = this.tabsMetadata[id];
                 this.uiBuilder_.reset()
                         .createElement('div')
                         .addTextValue(name)
-                        .addClassName('tab')
+                        .addClassName('tab' + isActive)
                         .appendTo(this.tabsHolder_)
                 const console_ = this.uiBuilder_.reset()
                                     .createElement('div')
