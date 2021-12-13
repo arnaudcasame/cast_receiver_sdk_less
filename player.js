@@ -57,7 +57,6 @@ class Player {
     // setInterval(()=>{
     //   this.ui_.printLine('code', 'event', 'message', 0);
     // }, 2000);
-    // this.waterMark_ = this.ui_.getWaterMark();
   }
 
   /** Initializes CAF */

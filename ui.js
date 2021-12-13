@@ -72,8 +72,9 @@ class UI {
      */
     formatTime_() {
         let logTime = new Date();
+        const milliseconds = logTime.getMilliseconds() < 100 ? "0" + logTime.getMilliseconds() : logTime.getMilliseconds();
         logTime = logTime.toTimeString();
-        return logTime.substring(0, logTime.indexOf('GMT') - 1);
+        return logTime.substring(0, logTime.indexOf('GMT') - 1) + ":" + milliseconds;
     }
 
     createLine_(container, data){
