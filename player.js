@@ -101,6 +101,9 @@ class Player {
         const contentTime = this.getContentTime();
         this.broadcast('contentTime,' + contentTime);
         break;
+      case 'TabChange':
+          this.ui_.changeTab(parseInt(messageArray[1], 10));
+          break;
       default:
         this.broadcast('Message not recognized');
         break;

@@ -19,6 +19,7 @@ class UI {
             errors: 'Errors'
         };
         this.consoles_ = [];
+        this.tabs_ = [];
         this.buildConsole_();
         this.buildLogsListHolder_();
     }
@@ -33,11 +34,12 @@ class UI {
             }
             if (Object.hasOwnProperty.call(this.tabsMetadata, id)) {
                 const name = this.tabsMetadata[id];
-                this.uiBuilder_.reset()
+                const tab_ = this.uiBuilder_.reset()
                         .createElement('div')
                         .addTextValue(name)
                         .addClassName('tab' + isActive)
                         .appendTo(this.tabsHolder_)
+                        .getResult();
                 const console_ = this.uiBuilder_.reset()
                                     .createElement('div')
                                     .addClassName('console')
@@ -46,28 +48,42 @@ class UI {
                                     .appendTo(this.consolesHolder_)
                                     .getResult();
                 this.consoles_.push(console_);
+                this.tabs_.push(tab_);
             }
             index++;
         }
     }
 
     buildLogsListHolder_(){
-        const list = this.uiBuilder_.reset()
-                            .createElement('ul')
-                            .setStyle('padding', '0px')
-                            .setStyle('margin', '0px')
-                            .setStyle('width', '100%')
-                            .setStyle('height', '100%')
-                            .setStyle('list-style', 'none')
-                            .setStyle('overflow-y', 'scroll')
-                            .getResult();
-        this.consoles_[0].appendChild(list);
+        for (const console_ of this.consoles_) {
+            const list = this.uiBuilder_.reset()
+                                .createElement('ul')
+                                .setStyle('padding', '0px')
+                                .setStyle('margin', '0px')
+                                .setStyle('width', '100%')
+                                .setStyle('height', '100%')
+                                .setStyle('list-style', 'none')
+                                .setStyle('overflow-y', 'scroll')
+                                .getResult();
+            console_.appendChild(list);
+        }
     }
 
     printLine(code, event, message, whichConsole){
         const list = this.consoles_[whichConsole].firstChild;
         this.createLine_(list, {time : this.formatTime_(), event, code, message});
         list.scrollTop = list.scrollHeight;
+    }
+
+    changeTab(tabId){
+        for (let i = 0; i < this.consoles_.length; i++) {
+            const console = this.consoles_[i];
+            const tab = this.tabs_[i];
+            console.style.display = 'none';
+            tab.classList.remove('active');
+        }
+        this.tabs_[tabId].classList.add('active');
+        this.consoles_[tabId].style.display = 'block';
     }
 
     /**
