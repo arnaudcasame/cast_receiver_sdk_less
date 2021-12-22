@@ -87,7 +87,7 @@ class Player {
    * @private
    */
   processSenderMessage_(message) {
-    // console.log('Received message from sender: ' + message);
+    console.log('Received message from sender: ' + message);
     const messageArray = message.split(',');
     const method = messageArray[0];
     switch (method) {
@@ -183,7 +183,7 @@ class Player {
     }
     msg += '}';
     this.broadcast(msg);
-    this.ui_.printLine(event.detailedErrorCode, event.type, event.reason, 0);
+    this.ui_.printLine(event.detailedErrorCode, event.type, event.reason, 1);
   }
 
   /**
