@@ -89,10 +89,10 @@ class UI {
     changeConsoleHeight(flag){
         switch (flag) {
             case 'MID_SCREEN':
-                this.console_.style.height = '.5vh';
+                this.console_.style.height = '50vh';
                 break;
             case 'FULL_SCREEN':
-                this.console_.style.height = '1vh';
+                this.console_.style.height = '100vh';
                 break;
             default:
                 this.console_.style.height = '0px';
