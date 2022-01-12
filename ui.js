@@ -58,7 +58,7 @@ class UI {
         for (const console_ of this.consoles_) {
             const list = this.uiBuilder_.reset()
                                 .createElement('ul')
-                                .setStyle('padding', '0px')
+                                .setStyle('padding', '10px 0px')
                                 .setStyle('margin', '0px')
                                 .setStyle('width', '100%')
                                 .setStyle('height', '100%')
