@@ -2,18 +2,18 @@ class UI {
     constructor() {
         this.uiBuilder_ = new UIBuilder();
         this.console_ = this.uiBuilder_.getElementById('console-wrapper')
-                .getResult();
+                                    .getResult();
         this.tabsHolder_ = this.uiBuilder_
-                .reset()
-                .createElement('div')
-                .addIdName('tabs-holder')
-                .appendTo(this.console_)
-                .getResult();
+                                    .reset()
+                                    .createElement('div')
+                                    .addIdName('tabs-holder')
+                                    .appendTo(this.console_)
+                                    .getResult();
         this.consolesHolder_ = this.uiBuilder_.reset()
-                .createElement('div')
-                .addIdName('consoles-holder')
-                .appendTo(this.console_)
-                .getResult();
+                                    .createElement('div')
+                                    .addIdName('consoles-holder')
+                                    .appendTo(this.console_)
+                                    .getResult();
         this.tabsMetadata = {
             logs: 'Logs',
             errors: 'Errors'
@@ -84,6 +84,20 @@ class UI {
         }
         this.tabs_[tabId].classList.add('active');
         this.consoles_[tabId].style.display = 'block';
+    }
+
+    changeConsoleHeight(flag){
+        switch (flag) {
+            case 'mid_screen':
+                this.console_.style.height = '.5vh';
+                break;
+            case 'full_screen':
+                this.console_.style.height = '1vh';
+                break;
+            default:
+                this.console_.style.height = '0px';
+                break;
+        }
     }
 
     /**

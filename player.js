@@ -102,8 +102,11 @@ class Player {
         this.broadcast('contentTime,' + contentTime);
         break;
       case 'TabChange':
-          this.ui_.changeTab(parseInt(messageArray[1], 10));
-          break;
+        this.ui_.changeTab(parseInt(messageArray[1], 10));
+        break;
+      case 'ConsoleHeightChange':
+        this.ui_.changeConsoleHeight(messageArray[1]);
+        break;
       default:
         this.broadcast('Message not recognized');
         break;
