@@ -6,12 +6,12 @@ class UI {
         this.tabsHolder_ = this.uiBuilder_
                                     .reset()
                                     .createElement('div')
-                                    .addIdName('tabs-holder')
+                                    .setId('tabs-holder')
                                     .appendTo(this.console_)
                                     .getResult();
         this.consolesHolder_ = this.uiBuilder_.reset()
                                     .createElement('div')
-                                    .addIdName('consoles-holder')
+                                    .setId('consoles-holder')
                                     .appendTo(this.console_)
                                     .getResult();
         this.tabsMetadata = {
@@ -36,13 +36,13 @@ class UI {
                 const name = this.tabsMetadata[id];
                 const tab_ = this.uiBuilder_.reset()
                         .createElement('div')
-                        .addTextValue(name)
-                        .addClassName('tab' + isActive)
+                        .setTextValue(name)
+                        .setClassName('tab' + isActive)
                         .appendTo(this.tabsHolder_)
                         .getResult();
                 const console_ = this.uiBuilder_.reset()
                                     .createElement('div')
-                                    .addClassName('console')
+                                    .setClassName('console')
                                     .setAttribute('id', id)
                                     .setStyle('display', index === 0 ? 'block' : noDisplay)
                                     .appendTo(this.consolesHolder_)
@@ -114,14 +114,14 @@ class UI {
     createLine_(container, data){
         const listItem = this.uiBuilder_.reset()
                                 .createElement('li')
-                                .addClassName('list-item')
+                                .setClassName('list-item')
                                 .appendTo(container)
                                 .getResult();
         
         for (const key of Object.keys(data)) {
                 this.uiBuilder_.reset()
                         .createElement('span')
-                        .addTextValue(data[key] ? data[key] : '')
+                        .setTextValue(data[key] ? data[key] : '')
                         .appendTo(listItem);
         }
     }

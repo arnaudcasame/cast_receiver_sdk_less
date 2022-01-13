@@ -25,7 +25,7 @@
      * @param {String} className class name of the HTML Element to be created
      * @returns {UIBuilder} returns the UIBuilder instance
      */
-    addClassName(className){
+    setClassName(className){
         this.element_.setAttribute('class', className);
         return this;
     }
@@ -35,7 +35,7 @@
      * @param {String} id of the HTML Element to be created
      * @returns {UIBuilder} returns the UIBuilder instance
      */
-    addIdName(id){
+    setId(id){
         this.element_.setAttribute('id', id);
         return this;
     }
@@ -45,7 +45,7 @@
      * @param {String} text to be displayed by the created HTML Element
      * @returns {UIBuilder} returns the UIBuilder instance
      */
-    addTextValue(text){
+    setTextValue(text){
         this.element_.innerText = text || '';
         return this;
     }
@@ -55,7 +55,7 @@
      * @param {String} html text version to be displayed by the created HTML Element
      * @returns {UIBuilder} returns the UIBuilder instance
      */
-     addHTMLValue(html){
+     setHTMLValue(html){
         this.element_.innerHTML = html || '';
         return this;
     }
