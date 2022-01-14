@@ -95,7 +95,7 @@ class CastConsole {
         const method = messageArray[0];
         switch (method) {
             case 'getContentTime':
-                const contentTime = this.getContentTime();
+                const contentTime = null;
                 this.broadcast('contentTime,' + contentTime);
                 break;
             case 'TabChange':
