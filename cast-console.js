@@ -46,17 +46,17 @@ class CastConsole {
         // This intercepts the CAF load process, to load the IMA stream manager and
         // make a DAI stream request. It then injests the stream URL into the
         // original LOAD message, before passing it to CAF
-        this.playerManager_.setMessageInterceptor(
-            cast.framework.messages.MessageType.LOAD, (request) => {
-                return this.initializeStreamManager_(request);
-            });
+        // this.playerManager_.setMessageInterceptor(
+        //     cast.framework.messages.MessageType.LOAD, (request) => {
+        //         return this.initializeStreamManager_(request);
+        //     });
 
         // This intercepts CAF seek requests to cancel them in the case that an ad
         // is playing, and to modify them to enable snapback
-        this.playerManager_.setMessageInterceptor(
-            cast.framework.messages.MessageType.SEEK, (seekRequest) => {
-                return this.processSeekRequest_(seekRequest);
-            });
+        // this.playerManager_.setMessageInterceptor(
+        //     cast.framework.messages.MessageType.SEEK, (seekRequest) => {
+        //         return this.processSeekRequest_(seekRequest);
+        //     });
 
         // This passes ID3 events from the stream to the IMA to allow for updating
         // stream events on the fly in live streams
