@@ -28,6 +28,7 @@
     var player = new Player(document.getElementById('mediaElement'));
     player.initialize();
     player.setupCallbacks();
+    new CastConsole(player.getPlayerManager());
   </script>
 </body>
 </html>

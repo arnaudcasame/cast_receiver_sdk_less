@@ -225,8 +225,8 @@ class Player {
     this.castContext_.sendCustomMessage(NAMESPACE, undefined, message);
   }
 
-  getPlayerManager(){
-    return this.playerManager_;
+  getCastContext(){
+    return this.castContext_;
   }
 
 }
