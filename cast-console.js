@@ -144,6 +144,7 @@ class CastConsole {
         msg += '}';
         this.broadcast(msg);
         this.ui_.printLine(event.detailedErrorCode, event.type, event.reason, 1);
+        this.ui_.printLine(event.detailedErrorCode, event.type, this.getDetailedErrorMessage(event.detailedErrorCode), 1);
     }
 
     handleAllEvents(event){
@@ -219,5 +220,94 @@ class CastConsole {
     broadcast(message) {
         // console.log(message);
         this.castContext_.sendCustomMessage(NAMESPACE, undefined, message);
+    }
+
+    getDetailedErrorMessage(detailedErrorCode){
+        var message = '';
+        switch(detailedErrorCode){
+            case cast.framework.events.DetailedErrorCode.APP:
+                break;
+            case cast.framework.events.DetailedErrorCode.BREAK_CLIP_LOADING_ERROR:
+                break;
+            case cast.framework.events.DetailedErrorCode.BREAK_SEEK_INTERCEPTOR_ERROR:
+                break;
+            case cast.framework.events.DetailedErrorCode.DASH_INVALID_SEGMENT_INFO:
+                break;
+            case cast.framework.events.DetailedErrorCode.DASH_MANIFEST_NO_MIMETYPE:
+                break;
+            case cast.framework.events.DetailedErrorCode.DASH_MANIFEST_NO_PERIODS:
+                break;
+            case cast.framework.events.DetailedErrorCode.DASH_MANIFEST_UNKNOWN:
+                break;
+            case cast.framework.events.DetailedErrorCode.DASH_NETWORK:
+                break;
+            case cast.framework.events.DetailedErrorCode.DASH_NO_INIT:
+                break;
+            case cast.framework.events.DetailedErrorCode.GENERIC:
+                break;
+            case cast.framework.events.DetailedErrorCode.HLS_MANIFEST_MASTER:
+                break;
+            case cast.framework.events.DetailedErrorCode.HLS_MANIFEST_PLAYLIST:
+                break;
+            case cast.framework.events.DetailedErrorCode.HLS_NETWORK_INVALID_SEGMENT:
+                break;
+            case cast.framework.events.DetailedErrorCode.HLS_NETWORK_KEY_LOAD:
+                break;
+            case cast.framework.events.DetailedErrorCode.HLS_NETWORK_MASTER_PLAYLIST:
+                message = 'The HLS master playlist fails to download.';
+                break;
+            case cast.framework.events.DetailedErrorCode.HLS_NETWORK_NO_KEY_RESPONSE:
+                break;
+            case cast.framework.events.DetailedErrorCode.HLS_NETWORK_PLAYLIST:
+                break;
+            case cast.framework.events.DetailedErrorCode.HLS_SEGMENT_PARSING:
+                break;
+            case cast.framework.events.DetailedErrorCode.IMAGE_ERROR:
+                break;
+            case cast.framework.events.DetailedErrorCode.LOAD_FAILED:
+                message = 'A load command failed.'
+                break;
+            case cast.framework.events.DetailedErrorCode.LOAD_INTERRUPTED:
+                break;
+            case cast.framework.events.DetailedErrorCode.MANIFEST_UNKNOWN:
+                break;
+            case cast.framework.events.DetailedErrorCode.MEDIAKEYS_NETWORK:
+                break;
+            case cast.framework.events.DetailedErrorCode.MEDIAKEYS_UNKNOWN:
+                break;
+            case cast.framework.events.DetailedErrorCode.MEDIAKEYS_UNSUPPORTED:
+                break;
+            case cast.framework.events.DetailedErrorCode.MEDIAKEYS_WEBCRYPTO:
+                break;
+            case cast.framework.events.DetailedErrorCode.MEDIA_ABORTED:
+                break;
+            case cast.framework.events.DetailedErrorCode.MEDIA_DECODE:
+                break;
+            case cast.framework.events.DetailedErrorCode.MEDIA_ERROR_MESSAGE:
+                break;
+            case cast.framework.events.DetailedErrorCode.MEDIA_NETWORK:
+                break;
+            case cast.framework.events.DetailedErrorCode.MEDIA_SRC_NOT_SUPPORTED:
+                break;
+            case cast.framework.events.DetailedErrorCode.MEDIA_UNKNOWN:
+                break;
+            case cast.framework.events.DetailedErrorCode.NETWORK_UNKNOWN:
+                break;
+            case cast.framework.events.DetailedErrorCode.SEGMENT_NETWORK:
+                break;
+            case cast.framework.events.DetailedErrorCode.SEGMENT_UNKNOWN:
+                break;
+            case cast.framework.events.DetailedErrorCode.SMOOTH_MANIFEST:
+                break;
+            case cast.framework.events.DetailedErrorCode.SMOOTH_NETWORK:
+                break;
+            case cast.framework.events.DetailedErrorCode.SMOOTH_NO_MEDIA_DATA:
+                break;
+            case cast.framework.events.DetailedErrorCode.SOURCE_BUFFER_FAILURE:
+                break;
+            case cast.framework.events.DetailedErrorCode.TEXT_UNKNOWN:
+                break;
+        }
+        return message;
     }
 }
