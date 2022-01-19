@@ -127,7 +127,7 @@ class CastConsole {
 
     handleErrorEvent_(event){
         console.log(cast.framework.events.EventType.ERROR, event);
-        console.log('Media Unknown: ', cast.framework.events.EventType);
+        console.log('Media Unknown: ', cast.framework.events);
 
         let msg = '{';
         msg += ' detailedErrorCode: ' + event.detailedErrorCode + ', ';
