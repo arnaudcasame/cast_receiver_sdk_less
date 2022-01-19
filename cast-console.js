@@ -143,8 +143,7 @@ class CastConsole {
         }
         msg += '}';
         this.broadcast(msg);
-        this.ui_.printLine(event.detailedErrorCode, event.type, event.reason, 1);
-        this.ui_.printLine(event.detailedErrorCode, event.type, this.getDetailedErrorMessage(event.detailedErrorCode), 1);
+        this.ui_.printLine(event.detailedErrorCode, event.type, this.getDetailedErrorMessage(event.detailedErrorCode, event.reason), 1);
     }
 
     handleAllEvents(event){
@@ -222,90 +221,128 @@ class CastConsole {
         this.castContext_.sendCustomMessage(NAMESPACE, undefined, message);
     }
 
-    getDetailedErrorMessage(detailedErrorCode){
+    getDetailedErrorMessage(detailedErrorCode, reason){
         var message = '';
         switch(detailedErrorCode){
             case cast.framework.events.DetailedErrorCode.APP:
+                message = 'An error occurs outside of the framework (An event handler probably threw an error).';
                 break;
             case cast.framework.events.DetailedErrorCode.BREAK_CLIP_LOADING_ERROR:
+                message = 'The break clip load interceptor failed.';
                 break;
             case cast.framework.events.DetailedErrorCode.BREAK_SEEK_INTERCEPTOR_ERROR:
+                message = 'The break seek interceptor failed.';
                 break;
             case cast.framework.events.DetailedErrorCode.DASH_INVALID_SEGMENT_INFO:
+                message = 'The DASH manifest contains invalid segment info.';
                 break;
             case cast.framework.events.DetailedErrorCode.DASH_MANIFEST_NO_MIMETYPE:
+                message = 'The DASH manifest is missing a MimeType';
                 break;
             case cast.framework.events.DetailedErrorCode.DASH_MANIFEST_NO_PERIODS:
+                message = 'The DASH manifest is missing periods.';
                 break;
             case cast.framework.events.DetailedErrorCode.DASH_MANIFEST_UNKNOWN:
+                message = 'An unknown error occured while parsing the DASH manifest.';
                 break;
             case cast.framework.events.DetailedErrorCode.DASH_NETWORK:
+                message = 'An unknown network error occured while handling a DASH stream.';
                 break;
             case cast.framework.events.DetailedErrorCode.DASH_NO_INIT:
+                message = 'A DASH stream is missing an init.';
                 break;
             case cast.framework.events.DetailedErrorCode.GENERIC:
+                message = 'An unknown error occured.';
                 break;
             case cast.framework.events.DetailedErrorCode.HLS_MANIFEST_MASTER:
+                message = 'An error occured while parsing an HLS master manifest.';
                 break;
             case cast.framework.events.DetailedErrorCode.HLS_MANIFEST_PLAYLIST:
+                message = 'An error occured while parsing an HLS playlist.';
                 break;
             case cast.framework.events.DetailedErrorCode.HLS_NETWORK_INVALID_SEGMENT:
+                message = 'An HLS segment is invalid.';
                 break;
             case cast.framework.events.DetailedErrorCode.HLS_NETWORK_KEY_LOAD:
+                message = 'A request for an HLS key failed before it was sent.';
                 break;
             case cast.framework.events.DetailedErrorCode.HLS_NETWORK_MASTER_PLAYLIST:
                 message = 'The HLS master playlist fails to download.';
                 break;
             case cast.framework.events.DetailedErrorCode.HLS_NETWORK_NO_KEY_RESPONSE:
+                message = 'An HLS key failed to download.';
                 break;
             case cast.framework.events.DetailedErrorCode.HLS_NETWORK_PLAYLIST:
+                message = 'An HLS playlist failed to download.';
                 break;
             case cast.framework.events.DetailedErrorCode.HLS_SEGMENT_PARSING:
+                message = 'An HLS segment failed to parse.';
                 break;
             case cast.framework.events.DetailedErrorCode.IMAGE_ERROR:
+                message = 'An image failed to load.';
                 break;
             case cast.framework.events.DetailedErrorCode.LOAD_FAILED:
                 message = 'A load command failed.'
                 break;
             case cast.framework.events.DetailedErrorCode.LOAD_INTERRUPTED:
+                message = 'A load was interrupted by an unload, or by another load.';
                 break;
             case cast.framework.events.DetailedErrorCode.MANIFEST_UNKNOWN:
+                message = 'An unknown error occured while parsing a manifest.';
                 break;
             case cast.framework.events.DetailedErrorCode.MEDIAKEYS_NETWORK:
+                message = 'There is a media keys failure due to a network issue.';
                 break;
             case cast.framework.events.DetailedErrorCode.MEDIAKEYS_UNKNOWN:
+                message = 'There is an unknown error with media keys.';
                 break;
             case cast.framework.events.DetailedErrorCode.MEDIAKEYS_UNSUPPORTED:
+                message = 'MediaKeySession object cannot be created.';
                 break;
             case cast.framework.events.DetailedErrorCode.MEDIAKEYS_WEBCRYPTO:
+                message = 'A MediaKey Web crypto failed.';
                 break;
             case cast.framework.events.DetailedErrorCode.MEDIA_ABORTED:
+                message = 'The fetching process for the media resource was aborted by the user agent at the user\'s request.';
                 break;
             case cast.framework.events.DetailedErrorCode.MEDIA_DECODE:
+                message = 'An error occurred while decoding the media resource, after the resource was established to be usable.';
                 break;
             case cast.framework.events.DetailedErrorCode.MEDIA_ERROR_MESSAGE:
+                message = 'An error message was sent to the sender.';
                 break;
             case cast.framework.events.DetailedErrorCode.MEDIA_NETWORK:
+                message = 'A network error caused the user agent to stop fetching the media resource, after the resource was established to be usable.';
                 break;
             case cast.framework.events.DetailedErrorCode.MEDIA_SRC_NOT_SUPPORTED:
+                message = 'The media resource indicated by the src attribute was not suitable.';
                 break;
             case cast.framework.events.DetailedErrorCode.MEDIA_UNKNOWN:
+                message = 'The HTMLMediaElement threw an error, but CAF did not recognize the specific error.';
                 break;
             case cast.framework.events.DetailedErrorCode.NETWORK_UNKNOWN:
+                message = 'There was an unknown network issue.';
                 break;
             case cast.framework.events.DetailedErrorCode.SEGMENT_NETWORK:
+                message = 'A segment failed to download.';
                 break;
             case cast.framework.events.DetailedErrorCode.SEGMENT_UNKNOWN:
+                message = 'An unknown segment error occured.';
                 break;
             case cast.framework.events.DetailedErrorCode.SMOOTH_MANIFEST:
+                message = 'An error occured while parsing a Smooth manifest.';
                 break;
             case cast.framework.events.DetailedErrorCode.SMOOTH_NETWORK:
+                message = 'An unknown network error occured while handling a Smooth stream.';
                 break;
             case cast.framework.events.DetailedErrorCode.SMOOTH_NO_MEDIA_DATA:
+                message = 'A Smooth stream is missing media data.';
                 break;
             case cast.framework.events.DetailedErrorCode.SOURCE_BUFFER_FAILURE:
+                message = 'A source buffer could not be added to the MediaSource.';
                 break;
             case cast.framework.events.DetailedErrorCode.TEXT_UNKNOWN:
+                message = 'An unknown error occurred with a text stream.';
                 break;
         }
         return message;
